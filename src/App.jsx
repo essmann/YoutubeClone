@@ -1,24 +1,38 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+
+
 import React from "react"
-import { Form } from "./components/Comp.jsx"
 
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {Box} from "@mui/material";
 
-export const Context = React.createContext(null) 
+import {Feed} from './components/Feed'
+import {Navbar} from './components/Navbar'
+import {SearchFeed} from './components/SearchFeed'
+import {VideoDetail} from "./components/VideoDetail.jsx";
+
 
 function App() {
-  const [theme, setTheme] = useState(false);
-  console.log(Context);
+ 
 
 
   return (
-   <Context.Provider value={theme}>
-     <div>
-      <Form/>
-     </div>
-    </Context.Provider>
+    <BrowserRouter>
+    
+    <Box sx={{backgroundColor: '#000'}}>
+      <Navbar/>
+      <Routes>
+         <Route path="/" exact element= {<Feed/>} />
+         <Route path="/video:id" element={<VideoDetail/>} />
+        
+         <Route path="/search:searchTerm" element={<SearchFeed/>} />
+      </Routes>
+
+    </Box>
+    
+    </BrowserRouter>
   )
 }
 
